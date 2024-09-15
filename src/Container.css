@@ -1,0 +1,23 @@
+.container {
+    width: 100%;
+    box-sizing: border-box;
+    margin: 16px auto;
+    background-color: var(--card-background-color);
+    color: black;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    padding: 0.04rem 0.6rem;
+    border-radius: 8px;
+    overflow-y: auto;
+}
+
+.container > h2 {
+    color: var(--primary-color);
+    border-bottom: 3px solid var(--primary-color);
+    border-radius: 4px;
+    margin-bottom: 0.1rem;
+    padding-bottom: 0.3rem;
+}
+
+.container .content {
+    padding: 0.04rem 0.4rem;
+}

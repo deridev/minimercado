@@ -1,0 +1,67 @@
+.item-card {
+    width: 6rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--card-background-color);
+    border-radius: 8px;
+    margin: 0.5rem 0;
+    padding: 0.4rem 0.6rem;
+    transition: transform 0.2s, box-shadow 0.5s;
+}
+
+.item-card.disabled {
+    opacity: 0.6;
+    cursor: default;
+}
+
+.item-card:not(.disabled):hover {
+    transform: scale(1.01) translateY(-6px);
+    cursor: pointer;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+.item-card .emoji {
+    font-size: 2.5rem;
+    margin-bottom: 0.2rem;
+}
+
+.item-card .name {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.2rem;
+}
+
+.item-card .price {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 0.2rem;
+    color: var(--positive-color);
+    text-shadow: 2px 2px rgba(255, 255, 255, 0.4);
+}
+
+.item-card .stock-bar {
+    width: 100%;
+    height: 0.6rem;
+    background-color: var(--secondary-color);
+    border-radius: 4px;
+}
+
+.item-card .stock-bar-progress {
+    height: 100%;
+    background-color: #f1b138;
+    border-radius: 4px;
+    transition: width 0.2s;
+}
+
+.item-card p {
+    opacity: 80%;
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin-bottom: 0.2rem;
+    margin-top: 0.15rem;
+}
+
+.item-card:active {
+    transform: scale(0.95);
+}

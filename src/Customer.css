@@ -1,0 +1,49 @@
+.customer {
+    background-color: var(--secondary-color);
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    padding: 0.4rem 0.5rem;
+    margin: 0.4rem 0rem;
+    border-radius: 4px;
+    transition: transform 0.1s ease-in-out;
+}
+
+.customer .emoji {
+    height: 100%;
+    font-size: 2rem;
+    margin-right: 0.4rem;
+}
+
+.customer p {
+    margin: 0;
+    padding: 0;
+}
+
+.info .name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.2rem;
+    margin-top: 0.1rem;
+}
+
+.info .balance {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.2rem;
+    margin-top: 0;
+    color: var(--positive-color-dark);
+    opacity: 70%;
+}
+
+.info .state {
+    font-size: 0.95rem;
+    margin-bottom: 0.2rem;
+    margin-top: 0.1rem;
+    margin-left: 0.2rem;
+}
+
+.customer:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+    background-color: white;
+}

@@ -1,0 +1,132 @@
+.not-selectable {
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+}
+
+#tycoon {
+    margin: 0.4rem auto;
+    max-width: 100rem
+}
+
+#game-containers {
+    display: grid;
+    grid-template-columns: 1fr 2.3fr 0.8fr;
+    grid-template-rows: minmax(20rem, 38rem) 20rem;
+    gap: 0rem 1rem;
+}
+
+#game-containers > *:nth-child(4) {
+    grid-column: 1 / -1;
+}
+
+#notifications-container #notification-list {
+    list-style: none;
+    padding: 0;
+    margin: 0.4rem 0;
+}
+
+#notifications-container #notification-list li {
+    padding: 0.45rem 0.4rem;
+    border-radius: 4px;
+    background-color: var(--secondary-color);
+    color: black;
+    opacity: 90%;
+    font-size: 1.1rem;
+    font-weight: 400;
+    margin-bottom: 0.4rem;
+    transition: transform 0.1s ease-in-out;
+}
+
+#notifications-container #notification-list li:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+    background-color: white;
+}
+
+.categories-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.05rem;
+}
+
+.category {
+    background-color: rgb(224, 224, 224);
+    margin: 0.4rem 0.2rem;
+    padding: 0.6rem 0.8rem;
+    border-radius: 6px;
+}
+
+.category .category-items {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 0.3rem 0;
+}
+
+.category h3 {
+    color: var(--primary-color);
+    margin: 0;
+    padding: 0;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+#upgrades-container .content {
+    display: flex;
+    flex-direction: row;
+    gap: 0.8rem;
+    margin: 0.5rem 0;
+}
+
+.upgrade {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--secondary-color);
+    border-radius: 8px;
+    margin: 0.5rem 0;
+    padding: 0.4rem 0.6rem;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s, box-shadow 0.5s;
+}
+
+.upgrade.disabled {
+    opacity: 0.6;
+    cursor: default;
+}
+
+.upgrade:not(.disabled):hover {
+    transform: scale(1.01) translateY(-6px);
+    background-color: white;
+    cursor: pointer;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+.upgrade .emoji {
+    font-size: 2.5rem;
+    margin-bottom: 0.2rem;
+}
+
+.upgrade .name {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.2rem;
+}
+
+.upgrade .level {
+    font-size: 0.8rem;
+    font-weight: 500;
+    margin-bottom: 0.2rem;
+}
+
+.upgrade .cost {
+    font-size: 1.2rem;
+    font-weight: 800;
+    margin-bottom: 0.3rem;
+    color: var(--positive-color-dark);
+    text-shadow: 2px 2px rgba(255, 255, 255, 0.4);
+}
