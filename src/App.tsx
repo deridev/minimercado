@@ -314,6 +314,7 @@ function App() {
 
                                 const profit = itemWanted.sellPrice;
                                 stock.removeItem(itemWanted, 1);
+                                setStock(stock);
                                 setBalance(balance + profit);
                                 pushNotification(`${customer.name} comprou ${itemWanted.name} por $ ${profit.toFixed(2)}`);
                             } else {
@@ -401,7 +402,7 @@ function App() {
         }, 1200);
 
         return () => clearInterval(interval);
-    }, [customers, notifications]);
+    }, [customers, balance, stock, notifications]);
 
     return (
         <>

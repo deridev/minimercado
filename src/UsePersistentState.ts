@@ -15,7 +15,7 @@ function usePersistentState<T>(
     initialValue: T,
     strategy: SerializationStrategy<T> = defaultStrategy
 ): [T, React.Dispatch<React.SetStateAction<T>>] {
-    const [value, setValue] = useState<T>(() => {
+    const [state, setState] = useState<T>(() => {
         const storedValue = localStorage.getItem(`state:${key}`);
         if (storedValue) {
             try {
@@ -28,33 +28,46 @@ function usePersistentState<T>(
         return initialValue;
     });
 
-    const timeoutRef = useRef<number | null>(null);
+    const latestState = useRef(state);
 
-    const debouncedSave = useCallback((newValue: T) => {
-        if (timeoutRef.current !== null) {
-            clearTimeout(timeoutRef.current);
-        }
-        timeoutRef.current = setTimeout(() => {
+    useEffect(() => {
+        latestState.current = state;
+    }, [state]);
+
+    useEffect(() => {
+        const saveState = () => {
             try {
-                localStorage.setItem(`state:${key}`, strategy.serialize(newValue));
+                localStorage.setItem(`state:${key}`, strategy.serialize(latestState.current));
             } catch (error) {
                 console.error(`Error serializing value for key "${key}":`, error);
             }
-            timeoutRef.current = null;
-        }, 100) as unknown as number;
+        };
+
+        window.addEventListener('beforeunload', saveState);
+
+        return () => {
+            saveState();
+            window.removeEventListener('beforeunload', saveState);
+        };
     }, [key, strategy]);
 
-    useEffect(() => {
-        debouncedSave(value);
-        
-        return () => {
-            if (timeoutRef.current !== null) {
-                clearTimeout(timeoutRef.current);
+    const setStateAndPersist = useCallback((newState: React.SetStateAction<T>) => {
+        setState((prevState) => {
+            const nextState = typeof newState === 'function'
+                ? (newState as (prevState: T) => T)(prevState)
+                : newState;
+            
+            try {
+                localStorage.setItem(`state:${key}`, strategy.serialize(nextState));
+            } catch (error) {
+                console.error(`Error serializing value for key "${key}":`, error);
             }
-        };
-    }, [value, debouncedSave]);
+            
+            return nextState;
+        });
+    }, [key, strategy]);
 
-    return [value, setValue];
+    return [state, setStateAndPersist];
 }
 
 export type { SerializationStrategy };
