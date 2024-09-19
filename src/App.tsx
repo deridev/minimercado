@@ -208,8 +208,10 @@ function App() {
         setNotifications([notification, ...nots]);
     };
 
-    const buyItem = (item: Item) => {
-        const amount = 1;
+    const buyItem = (item: Item, amount: number) => {
+        const maxItemBuyableAmount = Math.min(Math.trunc(item.buyPrice / balance), stock.getItemMaxStock(item, getUpgradeLevel("storage")));
+        if (maxItemBuyableAmount > amount && maxItemBuyableAmount !== 0) amount = maxItemBuyableAmount;
+
         const price = item.buyPrice * amount;
         if (balance < price) {
             return;
@@ -433,7 +435,7 @@ function App() {
                                                     price={item.buyPrice}
                                                     stock={stock.getItem(item).amount}
                                                     maxStock={stock.getItemMaxStock(item, getUpgradeLevel("storage"))}
-                                                    onClickCallback={() => buyItem(item)}
+                                                    onClickCallback={(e) => buyItem(item, e.shiftKey ? 10 : 1)}
                                                 />
                                             ))}
                                         </div>

@@ -1,3 +1,4 @@
+import React from "react"
 import "./ItemCard.css"
 
 type ItemCardProps = {
@@ -7,12 +8,12 @@ type ItemCardProps = {
     price: number
     stock: number
     maxStock: number
-    onClickCallback?: () => void
+    onClickCallback?: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
 }
 
 function ItemCard({ emoji, disabled, name, price, stock, maxStock, onClickCallback }: ItemCardProps) {
     return (
-        <div className={`item-card not-selectable ${disabled ? "disabled" : ""}`} onClick={(e) => { e.preventDefault(); onClickCallback?.() }}> 
+        <div className={`item-card not-selectable ${disabled ? "disabled" : ""}`} onClick={(e) => { e.preventDefault(); onClickCallback?.(e) }}> 
             <div className="emoji not-selectable">{emoji}</div>
             <div className="name">{name}</div>
             <div className="price">$ {price}</div>
