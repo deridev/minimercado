@@ -209,8 +209,11 @@ function App() {
     };
 
     const buyItem = (item: Item, amount: number) => {
-        const maxItemBuyableAmount = Math.min(Math.trunc(item.buyPrice / balance), stock.getItemMaxStock(item, getUpgradeLevel("storage")));
-        if (maxItemBuyableAmount > amount && maxItemBuyableAmount !== 0) amount = maxItemBuyableAmount;
+        const maxBuyableAmount = Math.min(
+            stock.getItemMaxStock(item, getUpgradeLevel("storage")) - stock.getItem(item).amount,
+            Math.trunc(balance / item.buyPrice)
+        );
+        if (maxBuyableAmount < amount && maxBuyableAmount !== 0) amount = maxBuyableAmount;
 
         const price = item.buyPrice * amount;
         if (balance < price) {
